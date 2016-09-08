@@ -11,15 +11,51 @@ plugins = [
 		name: 'main',
 		children: true,
 		minChunks: 2
-	})
+	}),
+
+	// Cleanup the builds/ folder before
+	// compiling our final assets
+	new CleanPlugin('builds'),
+
+	// This plugin looks for similar chunks and files
+	// and merges them for better caching by the user
+	new webpack.optimize.DedupePlugin(),
+
+	// This plugins optimizes chunks and modules by
+	// how much they are used in your app
+	new webpack.optimize.OccurenceOrderPlugin(),
+
+	// This plugin prevents Webpack from creating chunks
+	// that would be too small to be worth loading separately
+	new webpack.optimize.MinChunkSizePlugin({
+		minChunkSize: 51200, // ~50kb
+	}),
+
+	// This plugin minifies all the Javascript code of the final bundle
+	new webpack.optimize.UglifyJsPlugin({
+		mangle: true,
+		compress: {
+			warnings: false, // Suppress uglification warnings
+		},
+	}),
+
+	// This plugins defines various variables that we can set to false
+	// in production to avoid code related to them from being compiled
+	// in our final bundle
+	new webpack.DefinePlugin({
+		__SERVER__: false,
+		__DEVELOPMENT__: false,
+		__DEVTOOLS__: false,
+		'process.env': {
+			NODE_ENV: JSON.stringify('production'),
+		},
+	}),
 ]
 
 module.exports = {
-	debug: true,
+	debug: false,
 	entry: [
-		'webpack-dev-server/client?http://0.0.0.0:3000',
-		'webpack/hot/only-dev-server',
-		'./src/client.jsx'
+		'./src/client.jsx',
 	],
 	module: {
 		loaders: [{
@@ -35,19 +71,13 @@ module.exports = {
 		}, {
 			test: /\.scss$/,
 			loaders: ["style", "css", "sass"]
-		},{
-      test: /\.(ttf|eot|woff(2)?)(\?(t=)?[a-z0-9]+)?$/,
-      loader: 'url?limit=50000&hash=sha512&digest=hex&name=[hash].[ext]'
-    }, {
-      test: /\.(svg?)(\?(t=)?[a-z0-9]+)$/,
-      loader: 'url?limit=50000&hash=sha512&digest=hex&name=[hash].[ext]'
-    }, {
+		}, {
 			test: /\.svg$/,
 			loader: 'svg-inline'
 		}, {
 			test: /\.(jpe?g|png|gif)$/i,
 			loaders: [
-				'file?hash=sha512&digest=hex&name=[hash].[ext]',
+				'file?hash=sha512&digest=hex&name=./[hash].[ext]',
 				'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
 			]
 		}, {
@@ -68,14 +98,6 @@ module.exports = {
 		publicPath: '/',
 		filename: 'bundle.js'
 	},
-	devServer: {
-		contentBase: './dist',
-		hot: true,
-		headers: {
-			"Access-Control-Allow-Origin": "*"
-		},
-		historyApiFallback: true
-	},
 	plugins: plugins,
-	devtool: 'eval',
+	devtool: false,
 }

@@ -1,45 +1,73 @@
 {
-  "name": "ll",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --port 3000 --host 0.0.0.0 --content-base"
+  "name": "Disorder",
+  "version": "0.0.1",
+  "description": "Simple project that contains some funcy things",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dilidili/Disorder.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dilidili/Disorder/issues"
+  },
+  "homepage": "https://github.com/dilidili/Disorder#readme",
+  "scripts": {
+    "start": "webpack-dev-server --port 3000 --host 0.0.0.0 --progress --colors --content-base",
+    "lint": "eslint src && echo \"eslint: no lint errors\"",
+    "build": "NODE_ENV=production webpack -p --config webpack.deploy.config.js",
+    "server": "node server"
+  },
   "devDependencies": {
-    "babel-core": "^6.9.1",
+    "babel-core": "^6.4.5",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "redux-devtools": "^3.3.1",
-    "webpack": "^1.13.1"
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "clean-webpack-plugin": "^0.1.8",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.10.2",
+    "eslint-plugin-react": "^5.1.1",
+    "express": "^4.13.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.4.2",
+    "react-hot-loader": "^1.3.0",
+    "resolve-url": "^0.2.1",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.0",
+    "svg-inline-loader": "^0.4.1",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "file-loader": "^0.8.5"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
-    "draft-js": "^0.7.0",
-    "jquery": "^3.0.0",
+    "axios": "^0.9.1",
+    "babel-polyfill": "^6.3.14",
+    "classnames": "^2.2.4",
+    "history": "^2.0.0",
+    "image-webpack-loader": "^1.8.0",
+    "immutable": "^3.7.6",
     "moment": "^2.13.0",
     "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.0.2",
     "react-document-title": "^2.0.1",
     "react-dom": "^0.14.6",
-    "react-hot-loader": "^1.3.0",
     "react-motion": "^0.4.2",
-    "react-redux": "^4.4.5",
+    "react-redux": "^4.0.6",
     "react-responsive-mixin": "^0.3.5",
     "react-router": "^1.0.2",
     "react-router-redux": "^3.0.0",
-    "react-swipeable": "^3.4.0",
     "react-timer-mixin": "^0.13.3",
-    "react-waypoint": "^2.0.3",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
     "redux-immutablejs": "0.0.8",
     "redux-logger": "^2.4.0",
     "redux-router": "^1.0.0-beta5",
     "redux-thunk": "^1.0.3",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "svg-inline-react": "^1.0.0",
+    "underscore": "^1.8.3",
+    "velocity-animate": "^1.2.3",
+    "velocity-react": "^1.1.5",
+    "moment": "^2.13.0"
   }
 }
