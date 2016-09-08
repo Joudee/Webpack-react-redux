@@ -59,7 +59,7 @@ const store = createMyStore(reducer)
 ```
 
 如果不需要使用middlewares（中间件），直接在jsx文件import createMyStore from 'redux'即可。
-如果需要使用middlewares，主要是编写store
+如果需要使用middlewares，主要是编写store，[详情查看官方文档](http://cn.redux.js.org/docs/api/compose.html)
 
 ```js
 export const createMyStore = function(rootReducer) {
