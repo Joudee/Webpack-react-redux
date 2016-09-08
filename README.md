@@ -71,7 +71,6 @@ export const createMyStore = function(rootReducer) {
 
     let middlewares = []
     middlewares.push(thunkMiddleware)
-    middlewares.push(callAPIMiddleware)
 
     if (config.debug) {
         const loggerMiddleware = createLogger({
