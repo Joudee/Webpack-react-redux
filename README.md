@@ -63,7 +63,6 @@ const store = createMyStore(reducer)
 
 ```js
 export const createMyStore = function(rootReducer) {
-    // syn the react router with redux store
     const reduxRouterEnhancer = reduxReactRouter({
         routes,
         createHistory,
@@ -75,7 +74,6 @@ export const createMyStore = function(rootReducer) {
     middlewares.push(callAPIMiddleware)
 
     if (config.debug) {
-        // middleware that logs the global state for debug
         const loggerMiddleware = createLogger({
             stateTransformer: (state) => {
                 return state.toJS()
