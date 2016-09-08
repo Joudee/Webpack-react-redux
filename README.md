@@ -49,7 +49,7 @@ npm start//需要在package.json中配置
 
 ##React+redux的使用
 
-在如果文件client.jsx中
+首先在入口文件client.jsx中使用Provider关联
 
 ```js
 const store = createMyStore(reducer)
