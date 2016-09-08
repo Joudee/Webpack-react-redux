@@ -1,8 +1,8 @@
 # Webpack+react+redux环境搭建
 终端操作
-```sh
+```js
 npm install
-npm start
+npm start//需要在package.json中配置
 ```
 操作完成，相关的环境已经配好，直接在浏览器输入0.0.0.0:8000即可访问。在clinet.jsx直接调用自己写的组件
 
@@ -45,4 +45,48 @@ npm start
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   }
+```
+
+##React+redux的使用
+
+在如果文件client.jsx中
+
+```js
+const store = createMyStore(reducer)
+<Provider store={store}>
+    {routes}
+</Provider>
+```
+
+如果不需要使用middlewares（中间件），直接在jsx文件import createMyStore from 'redux'即可。
+如果需要使用middlewares，主要是编写store
+
+```js
+export const createMyStore = function(rootReducer) {
+    // syn the react router with redux store
+    const reduxRouterEnhancer = reduxReactRouter({
+        routes,
+        createHistory,
+        routerStateSelector: state => state.get('route'),
+    })
+
+    let middlewares = []
+    middlewares.push(thunkMiddleware)
+    middlewares.push(callAPIMiddleware)
+
+    if (config.debug) {
+        // middleware that logs the global state for debug
+        const loggerMiddleware = createLogger({
+            stateTransformer: (state) => {
+                return state.toJS()
+            },
+        })
+        middlewares.push(loggerMiddleware)
+    }
+
+    const createStoreWithMiddleware = compose(applyMiddleware(...middlewares), reduxRouterEnhancer)(createStore)
+    const store = createStoreWithMiddleware(rootReducer)
+
+    return store
+}
 ```
