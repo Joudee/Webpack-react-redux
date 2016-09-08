@@ -8,21 +8,7 @@ npm start
 
 #相关环境搭建
 
-##Webpack安装
-
-####使用npm全局安装Webpack
-
-```sh
-npm install webpack -g
-```
-
-####创建package.json文件
-
-```sh
-npm install webpack --save-dev
-```
-
-####在package.json文件编辑需要的相关组件
+##在package.json文件编辑需要的相关组件
 
 ```js
   "devDependencies": {
